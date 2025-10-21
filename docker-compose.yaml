@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: news_feed_backend
+    restart: always
+    env_file:
+      - ./backend/.env
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    command: sh -c "npm install && npm run dev"
+    working_dir: /app
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: news_feed_frontend
+    restart: always
+    ports:
+      - "3000:3000"
+      - "49153:49153"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - type: tmpfs
+        target: /app/.next/cache
+    environment:
+      NEXT_PUBLIC_BACKEND_URL: http://host.docker.internal:8080
+      BACKEND_URL: http://host.docker.internal:8080
+      CHOKIDAR_USEPOLLING: "true"
+      WATCHPACK_POLLING: "true"
+      CHOKIDAR_INTERVAL: "200"
+    command: sh -c "npm install && npm run dev"
+    working_dir: /app

@@ -1,0 +1,20 @@
+{
+  "name": "backend",
+  "lockfileVersion": 3,
+  "requires": true,
+  "type": "module",
+  "packages": {},
+  "scripts": {
+    "dev": "nodemon app.js 8080",
+    "start": "node app.js 8080"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10.1.0",
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
+  }
+}
