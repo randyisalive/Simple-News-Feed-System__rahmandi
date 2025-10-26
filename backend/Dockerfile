@@ -10,8 +10,7 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Install nodemon globally for auto-reload
-RUN npm install -g nodemon
+
 
 # Copy the rest of the app
 COPY . .
